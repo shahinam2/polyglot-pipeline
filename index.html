@@ -4,6 +4,33 @@
 </head>
 
 <body>
+    <!-- Language Picker Start -->
+    <div style="text-align:right; margin: 20px 30px 0 0;">
+        <label for="lang-picker">Choose language: </label>
+        <select id="lang-picker">
+            <option value="en">English</option>
+            <option value="es">Español</option>
+            <option value="zh">中文</option>
+            <option value="ar">العربية</option>
+            <option value="hi">हिन्दी</option>
+            <option value="fr">Français</option>
+        </select>
+    </div>
+    <script>
+        // Redirect to the selected language's index.html
+        document.getElementById('lang-picker').addEventListener('change', function() {
+            var lang = this.value;
+            window.location.href = '/' + lang + '/index.html';
+        });
+        // Optionally, set the picker to the current language
+        (function() {
+            var match = window.location.pathname.match(/^\/(en|es|zh|ar|hi|fr)\//);
+            if (match) {
+                document.getElementById('lang-picker').value = match[1];
+            }
+        })();
+    </script>
+    <!-- Language Picker End -->
 	<section>
 		<div class="leftBox">
 			<div class="content">
