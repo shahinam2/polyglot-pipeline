@@ -5,17 +5,17 @@
 
 <body>
     <!-- Language Picker Start -->
-    <div style="text-align:right; margin: 20px 30px 0 0;">
-        <label for="lang-picker">Choose language: </label>
-        <select id="lang-picker">
-            <option translate="no" value="en">English</option>
-            <option translate="no" value="es">Española</option>
-            <option translate="no" value="zh">中国人</option>
-            <option translate="no" value="ar">عربي</option>
-            <option translate="no" value="hi">हिन्दी</option>
-            <option translate="no" value="fr">Français</option>
-        </select>
-    </div>
+  <div style="text-align:right; margin: 10px 40px 10px 0;">
+    <label for="lang-picker">Choose language:</label>
+    <select id="lang-picker" name="lang" aria-label="Site language">
+      <option value="en"><span lang="en">English</span></option>
+      <option value="es"><span lang="es">Español</span></option>
+      <option value="zh"><span lang="zh">中文</span></option>
+      <option value="ar" dir="rtl"><span lang="ar">عربي</span></option>
+      <option value="hi"><span lang="hi">हिन्दी</span></option>
+      <option value="fr"><span lang="fr">Français</span></option>
+    </select>
+  </div>
   <script>
   (function () {
     const picker    = document.getElementById('lang-picker');
