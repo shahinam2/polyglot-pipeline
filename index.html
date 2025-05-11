@@ -20,30 +20,32 @@
   <script>
   (function () {
     const picker    = document.getElementById('lang-picker');
-    const supported = ['en','es','zh','ar','hi','fr'];
+    const supported = ['en', 'es', 'zh', 'ar', 'hi', 'fr'];
   
-    /* --- initial selection --------------------------------------------- */
-    const match  = location.pathname.match(/^\/(en|es|zh|ar|hi|fr)\//);
-    picker.value = match ? match[1] : 'en';
+    /* ---------- set initial picker value ---------- */
+    const m = location.pathname.match(/^\/(en|es|zh|ar|hi|fr)(?=\/)/);
+    picker.value = m ? m[1] : 'en';
   
-    /* --- change handler ------------------------------------------------- */
+    /* ---------- change handler ---------- */
     picker.addEventListener('change', e => {
       const lang = e.target.value;
   
-      /* Strip an existing language prefix (if any) from the current path.   *
-       * Example: /es/pricing.html → /pricing.html                           */
-      let rest = location.pathname.replace(/^\/(en|es|zh|ar|hi|fr)(?=\/)/, '');
-      if (rest === '') rest = '/';                // root becomes "/" again
+      /* Strip any existing language prefix from the current path */
+      let path = location.pathname.replace(/^\/(en|es|zh|ar|hi|fr)(?=\/)/, '');
+  
+      /* If the remaining path is root, use /index.html so S3 finds the file */
+      if (path === '' || path === '/') path = '/index.html';
   
       /* Build the new URL */
       const newPath = lang === 'en'
-        ? rest                                        // English → root
-        : `/${lang}${rest.startsWith('/') ? '' : '/'}${rest}`;
+        ? path                       // English lives at the root
+        : `/${lang}${path}`;         // others live under /<lang>/
   
-      location.replace(newPath);   // no extra history entry
-      });
-    })();
-  </script>
+      location.replace(newPath);     // one history entry
+    });
+  })();
+</script>
+
 
   <!-- Language Picker End -->
 	<section>
