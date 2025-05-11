@@ -16,20 +16,33 @@
             <option translate="no" value="fr">Français</option>
         </select>
     </div>
-    <script>
-        // Redirect to the selected language's index.html
-        document.getElementById('lang-picker').addEventListener('change', function() {
-            var lang = this.value;
-            window.location.href = '/' + lang + '/index.html';
-        });
-        // Optionally, set the picker to the current language
-        (function() {
-            var match = window.location.pathname.match(/^\/(en|es|zh|ar|hi|fr)\//);
-            if (match) {
-                document.getElementById('lang-picker').value = match[1];
-            }
-        })();
-    </script>
+  <script>
+  (function () {
+    const picker    = document.getElementById('lang-picker');
+    const supported = ['en','es','zh','ar','hi','fr'];
+  
+    /* --- initial selection --------------------------------------------- */
+    const match  = location.pathname.match(/^\/(en|es|zh|ar|hi|fr)\//);
+    picker.value = match ? match[1] : 'en';
+  
+    /* --- change handler ------------------------------------------------- */
+    picker.addEventListener('change', e => {
+      const lang = e.target.value;
+  
+      /* Strip an existing language prefix (if any) from the current path.   *
+       * Example: /es/pricing.html → /pricing.html                           */
+      let rest = location.pathname.replace(/^\/(en|es|zh|ar|hi|fr)(?=\/)/, '');
+      if (rest === '') rest = '/';                // root becomes "/" again
+  
+      /* Build the new URL */
+      const newPath = lang === 'en'
+        ? rest                                        // English → root
+        : `/${lang}${rest.startsWith('/') ? '' : '/'}${rest}`;
+  
+      location.replace(newPath);   // no extra history entry
+      });
+    })();
+  </script>
     <!-- Language Picker End -->
 	<section>
 		<div class="leftBox">
