@@ -1,73 +1,41 @@
 <!DOCTYPE html>
+
 <head>
 	<link rel="stylesheet" href="index.css">
 </head>
 
 <body>
-  <!-- Language Picker Start -->
-  <div style="text-align:right; margin: 10px 40px 10px 0;">
-    <label for="lang-picker">Choose language:</label>
-    <select id="lang-picker" name="lang" aria-label="Site language">
-      <option value="en" translate="no"><span lang="en">English</span></option>
-      <option value="es" translate="no"><span lang="es">Español</span></option>
-      <option value="zh" translate="no"><span lang="zh">中文</span></option>
-      <option value="ar" translate="no" dir="rtl"><span lang="ar">عربي</span></option>
-      <option value="hi" translate="no"><span lang="hi">हिन्दी</span></option>
-      <option value="fr" translate="no"><span lang="fr">Français</span></option>
-    </select>
-  </div>
-  
-<script>
-(function () {
-  const picker = document.getElementById('lang-picker');
-  const supported = ['en','es','zh','ar','hi','fr'];
-  const COOKIE    = 'prefLang';
-  const YEAR      = 60*60*24*365;
-
-  /* -------- helper: read a cookie -------- */
-  const readCookie = name =>
-    document.cookie.split(';').map(v => v.trim())
-      .find(c => c.startsWith(name + '='))?.split('=')[1];
-
-  /* -------- initial value -------- */
-  const cookie = readCookie(COOKIE);
-  const pathMatch = location.pathname.match(/^\/(en|es|zh|ar|hi|fr)(?=\/)/);
-  picker.value = cookie || (pathMatch ? pathMatch[1] : 'en');
-
-  /* -------- change handler -------- */
-  picker.addEventListener('change', e => {
-    const lang = e.target.value;
-
-    /* Save the preference for one year (SameSite=Lax avoids 3rd‑party issues) */
-    document.cookie = `${COOKIE}=${lang}; Max-Age=${YEAR}; Path=/; SameSite=Lax`;
-
-    /* Strip any existing prefix from the current path */
-    let rest = location.pathname.replace(/^\/(en|es|zh|ar|hi|fr)(?=\/)/, '');
-    if (rest === '' || rest === '/') rest = '/index.html';
-
-    const newPath = lang === 'en'
-      ? rest                           // English lives at root
-      : `/${lang}${rest}`;
-
-    location.replace(newPath);         // avoid extra history entry
-  });
-})();
-</script>
-  <!-- Language Picker End -->
+	<!-- Language Picker Start -->
+	<div style="text-align:right; margin: 10px 40px 10px 0;">
+		<label for="lang-picker">Choose language:</label>
+		<select id="lang-picker" name="lang" aria-label="Site language">
+			<option value="en" translate="no"><span lang="en">English</span></option>
+			<option value="es" translate="no"><span lang="es">Español</span></option>
+			<option value="zh" translate="no"><span lang="zh">中文</span></option>
+			<option value="ar" translate="no" dir="rtl"><span lang="ar">عربي</span></option>
+			<option value="hi" translate="no"><span lang="hi">हिन्दी</span></option>
+			<option value="fr" translate="no"><span lang="fr">Français</span></option>
+		</select>
+	</div>
+	<!-- Language Picker End -->
 	<section>
 		<div class="leftBox">
 			<div class="content">
 				<h1>
-					Tech Conferences 
+					Tech Conferences
 				</h1>
 				<p>
-				Tech conferences have become a hotbed of innovation, attracting entrepreneurs and investors from around the world. For emerging tech startups, attending these events can be a game-changer.
+					Tech conferences have become a hotbed of innovation, attracting entrepreneurs and investors from
+					around the world. For emerging tech startups, attending these events can be a game-changer.
 				</p>
 				<p>
-				Tomorrow's market movers that attend tech conferences have the opportunity to help transform their respective trajectories. Even though these conferences can burn a circle in a startup's nascent piggy bank, it is important to remember what kind of illumination awaits you at the end of the tunnel that may extend to, and not be limited to, a once-in-a-lifetime opportunity.
+					Tomorrow's market movers that attend tech conferences have the opportunity to help transform their
+					respective trajectories. Even though these conferences can burn a circle in a startup's nascent
+					piggy bank, it is important to remember what kind of illumination awaits you at the end of the
+					tunnel that may extend to, and not be limited to, a once-in-a-lifetime opportunity.
 				</p>
 				<p>
-				Attend these conferences, near you:
+					Attend these conferences, near you:
 				</p>
 			</div>
 		</div>
@@ -103,7 +71,9 @@
 						<p>
 							Apple's annual developer conference, key for software and app innovation
 						</p>
-						<a href="https://www.apple.com/newsroom/2025/03/apples-worldwide-developers-conference-returns-the-week-of-june-9/">View Details</a>
+						<a
+							href="https://www.apple.com/newsroom/2025/03/apples-worldwide-developers-conference-returns-the-week-of-june-9/">View
+							Details</a>
 					</div>
 					<div style="clear:both;"></div>
 				</li>
@@ -127,6 +97,7 @@
 			</ul>
 		</div>
 	</section>
+	<script src="script.js"></script>
 </body>
 
 </html>
